@@ -1,0 +1,27 @@
+<div class="login-page" >
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img src="assets/images/logo.png" width="150px" class="user-avatar" />
+            <h1>AcEventos</h1>
+            <form role="form" [formGroup]="formLogin"
+                  novalidate (ngSubmit)="fnLogin()"
+                  accept-charset="utf-8" action="#">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="mail">Mail</label>
+                        <input type="text" ng-model="name" class="form-control"
+                               formControlName="mail" id="mail" placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control"
+                               formControlName="password" id="password" placeholder="Password">
+                    </div>
+                </div>
+                <p *ngIf="message">{{mensaje}}</p>
+                <input class="btn rounded-btn" name="commit" type="submit" value="Iniciar Sesion"/>
+            </form>
+        </div>
+    </div>
+</div>
