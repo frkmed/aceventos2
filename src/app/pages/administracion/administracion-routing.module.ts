@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdministracionComponent } from './administracion.component';
 import { EventosComponent } from './eventos/eventos.component';
+import { ClientesComponent } from './clientes/clientes.component';
 //import { FormLayoutsComponent } from './form-layouts/form-layouts.component';
 
 const routes: Routes = [{
@@ -11,6 +12,9 @@ const routes: Routes = [{
     children: [{
         path: 'eventos',
         component: EventosComponent,
+    },  {
+        path: 'clientes',
+        component: ClientesComponent,
     }],
 }];
 
@@ -28,5 +32,6 @@ export class AdministracionRoutingModule {
 
 export const routedComponents = [
     AdministracionComponent,
-    EventosComponent
+    EventosComponent,
+    ClientesComponent
 ];

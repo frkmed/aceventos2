@@ -163,6 +163,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Eventos',
         link: '/pages/administracion/eventos',
       },
+      {
+        title: 'Clientes',
+        link: '/pages/administracion/clientes',
+      },
     ],
   },
   {
