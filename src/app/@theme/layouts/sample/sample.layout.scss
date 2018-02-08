@@ -49,8 +49,9 @@
 
     /deep/ .main-container {
       height:
-        calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)} - #{nb-theme(sidebar-header-gap)}) !important;
-      border-top-right-radius: nb-theme(radius);
+        //calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)} - #{nb-theme(sidebar-header-gap)}) !important;
+        //border-top-right-radius: nb-theme(radius);
+        calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)}) !important;
     }
 
     /deep/ nb-sidebar-header {
@@ -127,4 +128,7 @@
       display: none;
     }
   }
+}
+nb-sidebar.menu-sidebar {
+  margin-top: 0!important;
 }
