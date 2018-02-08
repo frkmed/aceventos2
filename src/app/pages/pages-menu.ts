@@ -46,6 +46,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+    {
+        title: 'Administracion',
+        icon: 'nb-gear',
+        children: [
+            {
+                title: 'Eventos',
+                link: '/pages/administracion/eventos',
+            },
+            {
+                title: 'Clientes',
+                link: '/pages/administracion/clientes',
+            },
+            {
+                title: 'Empresas',
+                link: '/pages/administracion/empresas',
+            },
+        ],
+    },
   {
     title: 'Forms',
     icon: 'nb-compose',
@@ -152,20 +170,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Reset Password',
         link: '/auth/reset-password',
-      },
-    ],
-  },
-  {
-    title: 'Administracion',
-    icon: 'nb-gear',
-    children: [
-      {
-        title: 'Eventos',
-        link: '/pages/administracion/eventos',
-      },
-      {
-        title: 'Clientes',
-        link: '/pages/administracion/clientes',
       },
     ],
   },

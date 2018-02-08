@@ -5,8 +5,28 @@
             <nb-card-body>
                 <div class="" [ngClass]="{'index': showPanel}">
                     <div class="col-lg-12">
-                        <ng2-smart-table [settings]="settings" [source]="clientes" (deleteConfirm)="onDeleteConfirm($event)">
-                        </ng2-smart-table>
+                        <!--<ng2-smart-table [settings]="settings" [source]="clientes" (deleteConfirm)="onDeleteConfirm($event)">
+                        </ng2-smart-table>-->
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Apellido</th>
+                                <th>Nombre</th>
+                                <th>Dirección</th>
+                                <th>Telefono</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let item of clientes" (click)="select(item)">
+                                <th scope="row">{{item.id}}</th>
+                                <td>{{item.apellido}}</td>
+                                <td>{{item.nombre}}</td>
+                                <td>{{item.direccion}}</td>
+                                <td>{{item.telefono}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="col-lg-12">
                         <button type="submit" class="btn btn-secondary" (click)="crear()">Nuevo</button>

@@ -40,6 +40,7 @@ export class EventosComponent implements OnInit {
     public salon_id: number = 0;
     public detalle: string = '';
     public empresa_id: number = 1;
+    public tipoEvento: string = '';
 
     formContainer: FormGroup;
     private fb: FormBuilder;
@@ -49,6 +50,7 @@ export class EventosComponent implements OnInit {
     private _getTipoEvento;
     private _getSalon;
     private _getCliente;
+
 
     settings = {
         add: {
@@ -94,10 +96,10 @@ export class EventosComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.loadEventos();
         this.loadTipoEventos();
         this.loadClientes();
         this.loadSalones();
+        this.loadEventos();
 
         this.formContainer = this.buildForm(this.formContainer);
     }
@@ -136,6 +138,17 @@ export class EventosComponent implements OnInit {
             console.log(data);
             this.salones = data;
         });
+    }
+
+    getTipoEvento(tipo_evento_id): string {
+        this.tipoEvento = '';
+        this.tipo_eventos.forEach(item => {
+            if(tipo_evento_id == item.id) {
+                this.tipoEvento = item.nombre;
+                return this.tipoEvento;
+            }
+        });
+        return this.tipoEvento;
     }
 
     select(row) {
