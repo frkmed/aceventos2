@@ -5,6 +5,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { AdministracionRoutingModule, routedComponents } from './administracion-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SmartTableService } from '../../@core/data/smart-table.service';
+import { ToasterModule } from 'angular2-toaster';
 
 @NgModule({
     imports: [
@@ -12,7 +13,8 @@ import { SmartTableService } from '../../@core/data/smart-table.service';
         AdministracionRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        Ng2SmartTableModule
+        Ng2SmartTableModule,
+        ToasterModule,
     ],
     declarations: [
         ...routedComponents,

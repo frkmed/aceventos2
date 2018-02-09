@@ -3,6 +3,8 @@
         <nb-card>
             <nb-card-header>Administrar Salones</nb-card-header>
             <nb-card-body>
+                <toaster-container [toasterconfig]="config"></toaster-container>
+
                 <div class="" [ngClass]="{'index': showPanel}">
                     <div class="col-lg-12">
                         <ng2-smart-table [settings]="settings" [source]="salones" (rowSelect)="onRowSelect($event)">

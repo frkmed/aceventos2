@@ -9,7 +9,9 @@ import { AuthenticationService } from "../../../core/auth/authentication.service
 import { CoreService } from "../../../core/core.service";
 import { DbConnectService } from "../../../core/db-connect/db-connect.service";
 
+import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 
+import 'style-loader!angular2-toaster/toaster.css';
 
 @Component({
     selector: 'ngx-salones',
@@ -23,6 +25,22 @@ export class SalonesComponent implements OnInit {
     public salones: Array<any> = [];
     public alert: any;
     public message: boolean = false;
+
+    //TOASTER
+    config: ToasterConfig;
+
+    position = 'toast-top-right';
+    animationType = 'fade';
+    title = '';
+    content = ``;
+    timeout = 5000;
+    toastsLimit = 5;
+    type = 'default';
+
+    isNewestOnTop = true;
+    isHideOnClick = true;
+    isDuplicatesPrevented = false;
+    isCloseButton = true;
 
     //VARIABLES
     public showIndex: boolean = true;
@@ -93,7 +111,7 @@ export class SalonesComponent implements OnInit {
         },
     };
 
-    constructor(private coreService: CoreService, private dbConnectService: DbConnectService) {
+    constructor(private coreService: CoreService, private dbConnectService: DbConnectService, private toasterService: ToasterService) {
 
     }
 
@@ -110,6 +128,27 @@ export class SalonesComponent implements OnInit {
             console.log(data);
             this.salones = data;
         });
+    }
+
+    private showToast(type: string, title: string, body: string) {
+        this.config = new ToasterConfig({
+            positionClass: this.position,
+            timeout: this.timeout,
+            newestOnTop: this.isNewestOnTop,
+            tapToDismiss: this.isHideOnClick,
+            preventDuplicates: this.isDuplicatesPrevented,
+            animation: this.animationType,
+            limit: this.toastsLimit,
+        });
+        const toast: Toast = {
+            type: type,
+            title: title,
+            body: body,
+            timeout: this.timeout,
+            showCloseButton: this.isCloseButton,
+            bodyOutputType: BodyOutputType.TrustedHtml,
+        };
+        this.toasterService.popAsync(toast);
     }
 
     save() {
@@ -134,11 +173,13 @@ export class SalonesComponent implements OnInit {
             empresa_id: this.formContainer.get('empresa_id').value
         }).subscribe(response => {
             this._get.subscribe((data) => {
+                this.showToast("success", "Exito", "Los datos se guardaron con exito");
                 this.salones = data;
                 this.id = 0;
                 this.index();
             }, err => {
                 console.log(err);
+                this.showToast("error", "Error", err);
             });
         });
     }
@@ -158,11 +199,13 @@ export class SalonesComponent implements OnInit {
             empresa_id: this.formContainer.get('empresa_id').value
         }).subscribe(response => {
             this._get.subscribe((data) => {
+                this.showToast("success", "Exito", "Los datos se guardaron con exito");
                 this.salones = data;
                 this.id = 0;
                 this.index();
             }, err => {
                 console.log(err);
+
             });
         })
     }
