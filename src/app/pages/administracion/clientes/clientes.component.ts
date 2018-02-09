@@ -57,6 +57,14 @@ export class ClientesComponent implements OnInit {
     private _getLoc;
 
     settings = {
+        actions: {
+            columnTitle: 'Actions',
+            add: false,
+            edit: false,
+            delete: false,
+            custom: [],
+            position: 'left',
+        },
         add: {
             addButtonContent: '<i class="nb-plus"></i>',
             createButtonContent: '<i class="nb-checkmark"></i>',
@@ -144,24 +152,24 @@ export class ClientesComponent implements OnInit {
         });
     }
 
-    select(row) {
-        console.log(row);
-        this.selectedValue = row;
-        this.pais_id = row.pais_id;
+    onRowSelect(event): void {
+        console.log(event.data);
+        this.id = event.data.id;
+        this.selectedValue = event.data;
+        this.pais_id = event.data.pais_id;
+        this.provincia_id = event.data.provincia_id;
+        this.localidad_id = event.data.localidad_id;
         this.formContainer.setValue({
-            apellido: row.apellido,
-            nombre: row.nombre,
-            telefono: row.telefono,
-            direccion: row.direccion,
-            codigo_postal: row.codigo_postal,
-            pais_id: row.pais_id,
-            provincia_id: row.provincia_id,
-            localidad_id: row.localidad_id,
-            contacto: row.contacto,
-            mail: row.mail,
-            estado_cliente_id: row.estado_cliente_id,
-            empresa_id: row.empresa_id,
-            cuil: row.cuil
+            apellido: event.data.apellido,
+            nombre: event.data.nombre,
+            telefono: event.data.telefono,
+            direccion: event.data.direccion,
+            codigo_postal: event.data.codigo_postal,
+            contacto: event.data.contacto,
+            mail: event.data.mail,
+            estado_cliente_id: event.data.estado_cliente_id,
+            empresa_id: event.data.empresa_id,
+            cuil: event.data.cuil
         });
     }
 
@@ -176,15 +184,18 @@ export class ClientesComponent implements OnInit {
     create() {
         let cn: any;
         cn = this.dbConnectService.post('cliente', 'create', {
+            apellido: this.formContainer.get('apellido').value,
             nombre: this.formContainer.get('nombre').value,
-            tipo_evento_id: this.formContainer.get('tipo_evento_id').value,
-            estado_evento_id: this.formContainer.get('estado_evento_id').value,
-            cliente_id: this.formContainer.get('cliente_id').value,
-            fecha_pedido: this.formContainer.get('fecha_pedido').value,
-            fecha_evento: this.formContainer.get('fecha_evento').value,
-            invitados: this.formContainer.get('invitados').value,
-            salon_id: this.formContainer.get('salon_id').value,
-            detalle: this.formContainer.get('detalle').value,
+            telefono: this.formContainer.get('telefono').value,
+            direccion: this.formContainer.get('direccion').value,
+            codigo_postal: this.formContainer.get('codigo_postal').value,
+            pais_id: this.pais_id,
+            provincia_id: this.provincia_id,
+            localidad_id: this.localidad_id,
+            contacto: this.formContainer.get('contacto').value,
+            mail: this.formContainer.get('mail').value,
+            estado_cliente_id: this.formContainer.get('estado_cliente_id').value,
+            cuil: this.formContainer.get('cuil').value,
             empresa_id: this.formContainer.get('empresa_id').value
         }).subscribe(response => {
             this._get.subscribe((data) => {
@@ -201,15 +212,18 @@ export class ClientesComponent implements OnInit {
         let cn: any;
         cn = this.dbConnectService.post('cliente', 'update', {
             id: this.id,
+            apellido: this.formContainer.get('apellido').value,
             nombre: this.formContainer.get('nombre').value,
-            tipo_evento_id: this.formContainer.get('tipo_evento_id').value,
-            estado_evento_id: this.formContainer.get('estado_evento_id').value,
-            cliente_id: this.formContainer.get('cliente_id').value,
-            fecha_pedido: this.formContainer.get('fecha_pedido').value,
-            fecha_evento: this.formContainer.get('fecha_evento').value,
-            invitados: this.formContainer.get('invitados').value,
-            salon_id: this.formContainer.get('salon_id').value,
-            detalle: this.formContainer.get('detalle').value,
+            telefono: this.formContainer.get('telefono').value,
+            direccion: this.formContainer.get('direccion').value,
+            codigo_postal: this.formContainer.get('codigo_postal').value,
+            pais_id: this.pais_id,
+            provincia_id: this.provincia_id,
+            localidad_id: this.localidad_id,
+            contacto: this.formContainer.get('contacto').value,
+            mail: this.formContainer.get('mail').value,
+            estado_cliente_id: this.formContainer.get('estado_cliente_id').value,
+            cuil: this.formContainer.get('cuil').value,
             empresa_id: this.formContainer.get('empresa_id').value
         }).subscribe(response => {
             this._get.subscribe((data) => {
@@ -259,9 +273,6 @@ export class ClientesComponent implements OnInit {
             'nombre': [this.nombre, [Validators.required]],
             'direccion': [this.direccion, [Validators.required, Validators.minLength(4), Validators.maxLength(24)]],
             'codigo_postal': this.codigo_postal,
-            'pais_id': this.pais_id,
-            'provincia_id': this.provincia_id,
-            'localidad_id': this.localidad_id,
             'telefono': this.telefono,
             'contacto': this.contacto,
             'mail': this.mail,

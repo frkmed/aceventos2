@@ -5,6 +5,7 @@ import { AdministracionComponent } from './administracion.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { EmpresasComponent } from './empresas/empresas.component';
+import { SalonesComponent } from './salones/salones.component';
 //import { FormLayoutsComponent } from './form-layouts/form-layouts.component';
 
 const routes: Routes = [{
@@ -19,6 +20,9 @@ const routes: Routes = [{
     },  {
         path: 'empresas',
         component: EmpresasComponent,
+    },  {
+        path: 'salones',
+        component: SalonesComponent,
     }],
 }];
 
@@ -38,5 +42,6 @@ export const routedComponents = [
     AdministracionComponent,
     EventosComponent,
     ClientesComponent,
-    EmpresasComponent
+    EmpresasComponent,
+    SalonesComponent
 ];

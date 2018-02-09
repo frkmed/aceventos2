@@ -47,22 +47,26 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
     {
-        title: 'Administracion',
-        icon: 'nb-gear',
-        children: [
-            {
-                title: 'Eventos',
-                link: '/pages/administracion/eventos',
-            },
-            {
-                title: 'Clientes',
-                link: '/pages/administracion/clientes',
-            },
-            {
-                title: 'Empresas',
-                link: '/pages/administracion/empresas',
-            },
-        ],
+    title: 'Administracion',
+    icon: 'nb-gear',
+    children: [
+      {
+        title: 'Eventos',
+        link: '/pages/administracion/eventos',
+      },
+      {
+        title: 'Clientes',
+        link: '/pages/administracion/clientes',
+      },
+      {
+        title: 'Empresas',
+        link: '/pages/administracion/empresas',
+      },
+      {
+        title: 'Salones',
+        link: '/pages/administracion/salones',
+      },
+    ],
     },
   {
     title: 'Forms',

@@ -23,3 +23,8 @@ nb-card.inline-form-card nb-card-body {
   display: none;
   transition: 0.5s;
 }
+
+.nb-theme-cosmic ng2-smart-table table tr th,
+.nb-theme-cosmic ng2-smart-table table tr td{
+  padding: 0.5rem 1rem !important;
+}

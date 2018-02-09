@@ -53,6 +53,14 @@ export class EventosComponent implements OnInit {
 
 
     settings = {
+        actions: {
+            columnTitle: 'Actions',
+            add: false,
+            edit: false,
+            delete: false,
+            custom: [],
+            position: 'left',
+        },
         add: {
             addButtonContent: '<i class="nb-plus"></i>',
             createButtonContent: '<i class="nb-checkmark"></i>',
@@ -151,21 +159,22 @@ export class EventosComponent implements OnInit {
         return this.tipoEvento;
     }
 
-    select(row) {
-        console.log(row);
-        this.id = row.id;
-        this.selectedValue = row;
+
+    onRowSelect(event): void {
+        console.log(event.data);
+        this.id = event.data.id;
+        this.selectedValue = event.data;
         this.formContainer.setValue({
-            nombre: row.nombre,
-            tipo_evento_id: row.tipo_evento_id,
-            estado_evento_id: row.estado_evento_id,
-            cliente_id: row.cliente_id,
-            fecha_pedido: row.fecha_pedido,
-            fecha_evento: row.fecha_evento,
-            invitados: row.invitados,
-            salon_id: row.salon_id,
-            detalle: row.detalle,
-            empresa_id: row.empresa_id
+            nombre: event.data.nombre,
+            tipo_evento_id: event.data.tipo_evento_id,
+            estado_evento_id: event.data.estado_evento_id,
+            cliente_id: event.data.cliente_id,
+            fecha_pedido: event.data.fecha_pedido,
+            fecha_evento: event.data.fecha_evento,
+            invitados: event.data.invitados,
+            salon_id: event.data.salon_id,
+            detalle: event.data.detalle,
+            empresa_id: event.data.empresa_id
         });
     }
 

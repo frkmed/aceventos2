@@ -57,6 +57,14 @@ export class EmpresasComponent implements OnInit {
     private _getLoc;
 
     settings = {
+        actions: {
+            columnTitle: 'Actions',
+            add: false,
+            edit: false,
+            delete: false,
+            custom: [],
+            position: 'left',
+        },
         add: {
             addButtonContent: '<i class="nb-plus"></i>',
             createButtonContent: '<i class="nb-checkmark"></i>',
@@ -76,21 +84,21 @@ export class EmpresasComponent implements OnInit {
                 title: 'ID',
                 type: 'number',
             },
-            apellido: {
-                title: 'Apellido',
-                type: 'string',
-            },
             nombre: {
-                title: 'Nombre',
+                title: 'Empresa',
                 type: 'string',
             },
             direccion: {
-                title: 'direccion',
+                title: 'Direccion',
                 type: 'string',
             },
             telefono: {
                 title: 'Telefono',
-                type: 'number',
+                type: 'string',
+            },
+            contacto: {
+                title: 'Contacto',
+                type: 'string',
             }
         },
     };
@@ -144,24 +152,25 @@ export class EmpresasComponent implements OnInit {
         });
     }
 
-    select(row) {
-        console.log(row);
-        this.selectedValue = row;
-        this.pais_id = row.pais_id;
+
+    onRowSelect(event): void {
+        console.log(event.data);
+        this.id = event.data.id;
+        this.selectedValue = event.data;
+        this.pais_id = event.data.pais_id;
+        this.provincia_id = event.data.provincia_id;
+        this.localidad_id = event.data.localidad_id;
         this.formContainer.setValue({
-            nombre: row.nombre,
-            direccion: row.direccion,
-            codigo_postal: row.codigo_postal,
-            pais_id: row.pais_id,
-            provincia_id: row.provincia_id,
-            localidad_id: row.localidad_id,
-            cuit: row.cuit,
-            telefono: row.telefono,
-            contacto: row.contacto,
-            mail: row.mail,
-            web: row.web,
-            detalle: row.detalle,
-            estado_empresa_id: row.estado_empresa_id
+            nombre: event.data.nombre,
+            direccion: event.data.direccion,
+            codigo_postal: event.data.codigo_postal,
+            cuit: event.data.cuit,
+            telefono: event.data.telefono,
+            contacto: event.data.contacto,
+            mail: event.data.mail,
+            web: event.data.web,
+            detalle: event.data.detalle,
+            estado_empresa_id: event.data.estado_empresa_id
         });
     }
 
@@ -179,9 +188,9 @@ export class EmpresasComponent implements OnInit {
             nombre: this.formContainer.get('nombre').value,
             direccion: this.formContainer.get('direccion').value,
             codigo_postal: this.formContainer.get('codigo_postal').value,
-            pais_id: this.formContainer.get('pais_id').value,
-            provincia_id: this.formContainer.get('provincia_id').value,
-            localidad_id: this.formContainer.get('localidad_id').value,
+            pais_id: this.pais_id,
+            provincia_id: this.provincia_id,
+            localidad_id: this.localidad_id,
             cuit: this.formContainer.get('cuit').value,
             telefono: this.formContainer.get('telefono').value,
             contacto: this.formContainer.get('contacto').value,
@@ -202,14 +211,14 @@ export class EmpresasComponent implements OnInit {
 
     update() {
         let cn: any;
-        cn = this.dbConnectService.post('cliente', 'update', {
+        cn = this.dbConnectService.post('empresa', 'update', {
             id: this.id,
             nombre: this.formContainer.get('nombre').value,
             direccion: this.formContainer.get('direccion').value,
             codigo_postal: this.formContainer.get('codigo_postal').value,
-            pais_id: this.formContainer.get('pais_id').value,
-            provincia_id: this.formContainer.get('provincia_id').value,
-            localidad_id: this.formContainer.get('localidad_id').value,
+            pais_id: this.pais_id,
+            provincia_id: this.provincia_id,
+            localidad_id: this.localidad_id,
             cuit: this.formContainer.get('cuit').value,
             telefono: this.formContainer.get('telefono').value,
             contacto: this.formContainer.get('contacto').value,
@@ -264,9 +273,6 @@ export class EmpresasComponent implements OnInit {
             'nombre': [this.nombre, [Validators.required]],
             'direccion': [this.direccion, [Validators.required, Validators.minLength(4), Validators.maxLength(24)]],
             'codigo_postal': this.codigo_postal,
-            'pais_id': this.pais_id,
-            'provincia_id': this.provincia_id,
-            'localidad_id': this.localidad_id,
             'cuit': this.cuit,
             'telefono': this.telefono,
             'contacto': this.contacto,
@@ -281,12 +287,10 @@ export class EmpresasComponent implements OnInit {
 
         this.dbConnectService.onValueChanged(); // (re)set validation messages now);
 
-
         return form;
     }
 
     formErrors = {
-        'apellido': '',
         'nombre': '',
         'direccion': ''
     };

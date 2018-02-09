@@ -1,13 +1,13 @@
 {
-  "name": "ngx-admin",
+  "name": "aceventos2",
   "version": "2.0.2",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akveo/ngx-admin.git"
+    "url": "git+https://github.com/mmaneff/aceventos2.git"
   },
   "bugs": {
-    "url": "https://github.com/akveo/ngx-admin/issues"
+    "url": "https://github.com/mmaneff/aceventos2/issues"
   },
   "scripts": {
     "ng": "ng",
