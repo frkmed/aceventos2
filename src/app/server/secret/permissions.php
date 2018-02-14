@@ -59,7 +59,13 @@ class Permissions{
             'create' => PermissionTypes::Allowed,
             'update' => PermissionTypes::Allowed,
             'updateStatus' => PermissionTypes::Allowed
-        )
+        ),
+        'Proveedor' => array(
+            'get' => PermissionTypes::Allowed,
+            'create' => PermissionTypes::Allowed,
+            'update' => PermissionTypes::Allowed,
+            'updateStatus' => PermissionTypes::Allowed
+        ),
 
     );
 

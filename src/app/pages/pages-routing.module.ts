@@ -35,6 +35,9 @@ const routes: Routes = [{
     path: 'administracion',
     loadChildren: './administracion/administracion.module#AdministracionModule',
   }, {
+      path: 'almacen',
+      loadChildren: './almacen/almacen.module#AlmacenModule',
+  }, {
     path: 'login',
     loadChildren: './login/login.module#LoginModule',
   },

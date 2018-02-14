@@ -23,21 +23,21 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Apellido</th>
                                 <th>Nombre</th>
-                                <th>Direccion</th>
-                                <th>Telefono</th>
-                                <th>Estado</th>
+                                <th>Razón Social</th>
+                                <th>Dirección</th>
+                                <th>Teléfono</th>
+                                <th>Activo</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let item of clientes " (click)="onRowSelect(item)">
+                            <tr *ngFor="let item of proveedores " (click)="onRowSelect(item)">
                                 <th scope="row">{{item.id}}</th>
-                                <td>{{item.apellido}}</td>
                                 <td>{{item.nombre}}</td>
+                                <td>{{item.razon_social}}</td>
                                 <td>{{item.direccion}}</td>
                                 <td>{{item.telefono}}</td>
-                                <td>{{item.estado_cliente_id == 1 ? 'Activo' : 'Inactivo'}}</td>
+                                <td>{{item.estado == 1 ? 'Si' : 'No'}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -53,20 +53,20 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label>Apellido</label>
-                                    <input class="form-control" formControlName="apellido">
-                                </div>
-                            </div>
-                            <div class="col-lg-5">
-                                <div class="form-group">
                                     <label>Nombre</label>
                                     <input class="form-control" formControlName="nombre">
                                 </div>
                             </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <label>Razón Social</label>
+                                    <input class="form-control" formControlName="razon_social">
+                                </div>
+                            </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label>Cuil</label>
-                                    <input type="number" class="form-control" formControlName="cuil">
+                                    <label>Cuit</label>
+                                    <input type="number" class="form-control" formControlName="cuit">
                                 </div>
                             </div>
                         </div>
@@ -126,16 +126,12 @@
                                     <input class="form-control" formControlName="mail">
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Estado</label>
-                                    <select class="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
+                                    <label>Nota</label>
+                                    <input class="form-control" formControlName="nota">
                                 </div>
                             </div>
                         </div>
