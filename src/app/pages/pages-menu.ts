@@ -41,6 +41,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
             title: 'Proveedores',
             link: '/pages/almacen/proveedores',
         },
+        {
+            title: 'Productos',
+            link: '/pages/almacen/productos',
+        },
     ],
   },
   {

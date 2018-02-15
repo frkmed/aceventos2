@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <nb-card>
-            <nb-card-header>Administrar Proveedores</nb-card-header>
+            <nb-card-header>Administrar Productos</nb-card-header>
             <nb-card-body>
                 <toaster-container [toasterconfig]="config"></toaster-container>
 
@@ -24,20 +24,18 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nombre</th>
-                                <th>Razón Social</th>
-                                <th>Dirección</th>
-                                <th>Teléfono</th>
-                                <th>Activo</th>
+                                <th>Punto Repo</th>
+                                <th>Vendidos</th>
+                                <th>Estado</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let item of proveedores " (click)="onRowSelect(item)">
+                            <tr *ngFor="let item of productos " (click)="onRowSelect(item)">
                                 <th scope="row">{{item.id}}</th>
                                 <td>{{item.nombre}}</td>
-                                <td>{{item.razon_social}}</td>
-                                <td>{{item.direccion}}</td>
-                                <td>{{item.telefono}}</td>
-                                <td>{{item.estado == 1 ? 'Si' : 'No'}}</td>
+                                <td>{{item.pto_repo}}</td>
+                                <td>{{item.vendidos}}</td>
+                                <td>{{item.status}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -59,79 +57,76 @@
                             </div>
                             <div class="col-lg-5">
                                 <div class="form-group">
-                                    <label>Razón Social</label>
-                                    <input class="form-control" formControlName="razon_social">
+                                    <label>pto_repo</label>
+                                    <input type="number" class="form-control" formControlName="pto_repo">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label>Cuit</label>
-                                    <input type="number" class="form-control" formControlName="cuit">
+                                    <label>sku</label>
+                                    <input type="text" class="form-control" formControlName="sku">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label>Dirección</label>
-                                    <input class="form-control" formControlName="direccion">
+                                    <label>status</label>
+                                    <input type="number" class="form-control" formControlName="status">
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
-                                    <label>Cod. Postal</label>
-                                    <input type="number" class="form-control" formControlName="codigo_postal">
+                                    <label>vendidos</label>
+                                    <input type="number" class="form-control" formControlName="vendidos">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label>Teléfono</label>
-                                    <input type="number" class="form-control" formControlName="telefono">
+                                    <label>destacado</label>
+                                    <input type="number" class="form-control" formControlName="destacado">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>en_slider</label>
+                                    <input type="number" class="form-control" formControlName="en_slider">
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>en_oferta</label>
+                                    <input type="number" class="form-control" formControlName="en_oferta">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>producto_tipo_id</label>
+                                    <input type="number" class="form-control" formControlName="producto_tipo_id">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label>Pais</label>
-                                    <select [(ngModel)]="pais_id" [ngModelOptions]="{standalone: true}"
-                                            class="form-control" >
-                                        <option *ngFor="let pais of paises" [ngValue]="pais.id">{{pais.nombre}}</option>
-                                    </select>
+                                    <label>iva</label>
+                                    <input type="number" class="form-control" formControlName="iva">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label>Provincia</label>
-                                    <select [(ngModel)]="provincia_id" [ngModelOptions]="{standalone: true}"
-                                            class="form-control" >
-                                        <option *ngFor="let provincia of provincias" [ngValue]="provincia.id">{{provincia.nombre}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label>Localidad</label>
-                                    <select [(ngModel)]="localidad_id" [ngModelOptions]="{standalone: true}"
-                                            class="form-control">
-                                        <option *ngFor="let localidad of localidades" [ngValue]="localidad.id">{{localidad.nombre}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label>Mail</label>
-                                    <input class="form-control" formControlName="mail">
+                                    <label>tiempo_espera</label>
+                                    <input type="number" class="form-control" formControlName="tiempo_espera">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Nota</label>
-                                    <input class="form-control" formControlName="nota">
+                                    <label>descripcion</label>
+                                    <input type="text" class="form-control" formControlName="descripcion">
                                 </div>
                             </div>
                         </div>

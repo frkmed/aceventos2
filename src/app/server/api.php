@@ -18,6 +18,7 @@ require_once './pais/pais.php';
 require_once './salon/salon.php';
 require_once './plato/plato.php';
 require_once './proveedor/proveedor.php';
+require_once './producto/producto.php';
 require_once './mail/mail.php';
 
 try {

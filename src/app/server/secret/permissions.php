@@ -66,6 +66,12 @@ class Permissions{
             'update' => PermissionTypes::Allowed,
             'updateStatus' => PermissionTypes::Allowed
         ),
+        'Producto' => array(
+            'get' => PermissionTypes::Allowed,
+            'create' => PermissionTypes::Allowed,
+            'update' => PermissionTypes::Allowed,
+            'updateStatus' => PermissionTypes::Allowed
+        ),
 
     );
 
