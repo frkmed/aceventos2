@@ -192,8 +192,7 @@ export class ProductosComponent implements OnInit {
             en_oferta: item.en_oferta,
             producto_tipo_id: item.producto_tipo_id,
             iva: item.iva,
-            tiempo_espera: item.tiempo_espera,
-            empresa_id: item.empresa_id
+            tiempo_espera: item.tiempo_espera
         });
     }
 
@@ -225,6 +224,7 @@ export class ProductosComponent implements OnInit {
                 this.showToast("success", "Exito", "Los datos se guardaron con exito");
                 this.productos = data;
                 this.selectedValue = null;
+                this.formContainer.reset();
                 this.id = 0;
                 this.index();
             }, err => {
@@ -255,6 +255,7 @@ export class ProductosComponent implements OnInit {
                 this.showToast("success", "Exito", "Los datos se guardaron con exito");
                 this.productos = data;
                 this.selectedValue = null;
+                this.formContainer.reset();
                 this.id = 0;
                 this.index();
             }, err => {
@@ -319,7 +320,6 @@ export class ProductosComponent implements OnInit {
     }
 
     buildForm(form: FormGroup): FormGroup {
-
         this.fb = new FormBuilder();
         form = this.fb.group({
             'nombre': [this.nombre, [Validators.required]],

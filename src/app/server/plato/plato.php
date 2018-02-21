@@ -9,7 +9,7 @@ class Plato extends Main{
     /* @name: get
      * @description:
      */
-    function getPlatos(){
+    function get(){
         try {
             $results = $this->db->get('platos');
 

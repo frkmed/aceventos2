@@ -292,6 +292,7 @@ export class ClientesComponent implements OnInit {
                 this.showToast("success", "Exito", "Los datos se guardaron con exito");
                 this.clientes = data;
                 this.selectedValue = null;
+                this.formContainer.reset();
                 this.id = 0;
                 this.index();
             }, err => {
@@ -316,6 +317,7 @@ export class ClientesComponent implements OnInit {
                     this.showToast("success", "Exito", "Los datos se guardaron con exito");
                     this.clientes = data;
                     this.selectedValue = null;
+                    this.formContainer.reset();
                     this.id = 0;
                     this.index();
                 }, err => {

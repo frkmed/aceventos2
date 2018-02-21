@@ -202,6 +202,7 @@ export class EventosComponent implements OnInit {
         }).subscribe(response => {
             this._get.subscribe((data) => {
                 this.eventos = data;
+                this.formContainer.reset();
                 this.id = 0;
                 this.index();
             }, err => {
@@ -227,6 +228,7 @@ export class EventosComponent implements OnInit {
         }).subscribe(response => {
             this._get.subscribe((data) => {
                 this.eventos = data;
+                this.formContainer.reset();
                 this.id = 0;
                 this.index();
             }, err => {

@@ -14,18 +14,15 @@ import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-t
 import 'style-loader!angular2-toaster/toaster.css';
 
 @Component({
-    selector: 'ngx-proveedores',
-    templateUrl: './proveedores.component.html',
-    styleUrls: ['./proveedores.component.scss'],
+    selector: 'ngx-platos',
+    templateUrl: './platos.component.html',
+    styleUrls: ['./platos.component.scss'],
 })
 
-export class ProveedoresComponent implements OnInit {
+export class PlatosComponent implements OnInit {
 
     //ARREGLOS
-    public proveedores: Array<any> = [];
-    public paises: Array<any> = [];
-    public provincias: Array<any> = [];
-    public localidades: Array<any> = [];
+    public platos: Array<any> = [];
     public alert: any;
     public message: boolean = false;
 
@@ -51,29 +48,20 @@ export class ProveedoresComponent implements OnInit {
     selectedValue = null;
 
     public id: number = 0;
-    public razon_social: string = '';
     public nombre: string = '';
-    public telefono: number = 0;
-    public direccion: string = '';
-    public codigo_postal: string = '';
-    public pais_id: number = 1;
-    public provincia_id: number = 1;
-    public localidad_id: number = 1;
-    public contacto: string = '';
-    public mail: string = '';
+    public cantidad_personas: number = 0;
+    public guarnicion: string = '';
+    public detalle: string = '';
+    public costo_plato: number = 0;
+    public margen_ganancia: number = 0;
     public estado: number = 1;
     public empresa_id: number = 1;
-    public cuit: string = '';
-    public nota: string = '';
 
     formContainer: FormGroup;
     private fb: FormBuilder;
 
     //METODOS
     private _get;
-    private _getPa;
-    private _getPro;
-    private _getLoc;
 
     settings = {
         actions: {
@@ -127,10 +115,7 @@ export class ProveedoresComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.loadProveedores();
-        this.loadPaises();
-        this.loadProvincias();
-        this.loadLocalidades();
+        this.loadPlatos();
 
         this.formContainer = this.buildForm(this.formContainer);
     }
@@ -156,41 +141,15 @@ export class ProveedoresComponent implements OnInit {
         this.toasterService.popAsync(toast);
     }
 
-    loadProveedores():void {
-        this._get = this.dbConnectService.get('proveedor', 'get', {});
+    loadPlatos():void {
+        this._get = this.dbConnectService.get('plato', 'get', {});
 
         this._get.subscribe((data) => {
             console.log(data);
-            this.proveedores = data;
+            this.platos = data;
         });
     }
 
-    loadPaises():void {
-        this._getPa = this.dbConnectService.get('pais', 'getPaises', {});
-
-        this._getPa.subscribe((data) => {
-            console.log(data);
-            this.paises = data;
-        });
-    }
-
-    loadProvincias():void {
-        this._getPro = this.dbConnectService.get('pais', 'getProvincias', {});
-
-        this._getPro.subscribe((data) => {
-            console.log(data);
-            this.provincias = data;
-        });
-    }
-
-    loadLocalidades():void {
-        this._getLoc = this.dbConnectService.get('pais', 'getLocalidades', {});
-
-        this._getLoc.subscribe((data) => {
-            console.log(data);
-            this.localidades = data;
-        });
-    }
     /*
      onRowSelect(event): void {
      console.log(event.data);
@@ -216,21 +175,14 @@ export class ProveedoresComponent implements OnInit {
     onRowSelect(item): void {
         this.id = item.id;
         this.selectedValue = item;
-        this.pais_id = item.pais_id;
-        this.provincia_id = item.provincia_id;
-        this.localidad_id = item.localidad_id;
         this.formContainer.setValue({
-            razon_social: item.razon_social,
             nombre: item.nombre,
-            telefono: item.telefono,
-            direccion: item.direccion,
-            codigo_postal: item.codigo_postal,
-            contacto: item.contacto,
-            mail: item.mail,
-            estado: item.estado,
-            empresa_id: item.empresa_id,
-            cuit: item.cuit,
-            nota: item.nota
+            guarnicion: item.guarnicion,
+            cantidad_personas: item.cantidad_personas,
+            detalle: item.detalle,
+            costo_plato: item.costo_plato,
+            margen_ganancia: item.margen_ganancia,
+            empresa_id: item.empresa_id
         });
     }
 
@@ -244,25 +196,18 @@ export class ProveedoresComponent implements OnInit {
 
     create() {
         let cn: any;
-        cn = this.dbConnectService.post('proveedor', 'create', {
-            razon_social: this.formContainer.get('razon_social').value,
+        cn = this.dbConnectService.post('plato', 'create', {
             nombre: this.formContainer.get('nombre').value,
-            telefono: this.formContainer.get('telefono').value,
-            direccion: this.formContainer.get('direccion').value,
-            codigo_postal: this.formContainer.get('codigo_postal').value,
-            pais_id: this.pais_id,
-            provincia_id: this.provincia_id,
-            localidad_id: this.localidad_id,
-            contacto: this.formContainer.get('contacto').value,
-            mail: this.formContainer.get('mail').value,
-            estado: this.formContainer.get('estado').value,
-            cuit: this.formContainer.get('cuit').value,
-            nota: this.formContainer.get('nota').value,
+            guarnicion: this.formContainer.get('guarnicion').value,
+            cantidad_personas: this.formContainer.get('cantidad_personas').value,
+            detalle: this.formContainer.get('detalle').value,
+            costo_plato: this.formContainer.get('costo_plato').value,
+            margen_ganancia: this.formContainer.get('margen_ganancia').value,
             empresa_id: this.formContainer.get('empresa_id').value
         }).subscribe(response => {
             this._get.subscribe((data) => {
                 this.showToast("success", "Exito", "Los datos se guardaron con exito");
-                this.proveedores = data;
+                this.platos = data;
                 this.selectedValue = null;
                 this.formContainer.reset();
                 this.id = 0;
@@ -276,26 +221,19 @@ export class ProveedoresComponent implements OnInit {
 
     update() {
         let cn: any;
-        cn = this.dbConnectService.post('proveedor', 'update', {
+        cn = this.dbConnectService.post('plato', 'update', {
             id: this.id,
-            razon_social: this.formContainer.get('razon_social').value,
             nombre: this.formContainer.get('nombre').value,
-            telefono: this.formContainer.get('telefono').value,
-            direccion: this.formContainer.get('direccion').value,
-            codigo_postal: this.formContainer.get('codigo_postal').value,
-            pais_id: this.pais_id,
-            provincia_id: this.provincia_id,
-            localidad_id: this.localidad_id,
-            contacto: this.formContainer.get('contacto').value,
-            mail: this.formContainer.get('mail').value,
-            estado: this.formContainer.get('estado').value,
-            cuit: this.formContainer.get('cuit').value,
-            nota: this.formContainer.get('nota').value,
+            guarnicion: this.formContainer.get('guarnicion').value,
+            cantidad_personas: this.formContainer.get('cantidad_personas').value,
+            detalle: this.formContainer.get('detalle').value,
+            costo_plato: this.formContainer.get('costo_plato').value,
+            margen_ganancia: this.formContainer.get('margen_ganancia').value,
             empresa_id: this.formContainer.get('empresa_id').value
         }).subscribe(response => {
             this._get.subscribe((data) => {
                 this.showToast("success", "Exito", "Los datos se guardaron con exito");
-                this.proveedores = data;
+                this.platos = data;
                 this.selectedValue = null;
                 this.formContainer.reset();
                 this.id = 0;
@@ -314,13 +252,13 @@ export class ProveedoresComponent implements OnInit {
             this.showToast("warning", "Advertencia", "Debe seleccionar un registro");
         } else {
             let cn: any;
-            cn = this.dbConnectService.post('proveedor', 'updateStatus', {
+            cn = this.dbConnectService.post('cliente', 'updateStatus', {
                 id: this.id,
-                estado: this.selectedValue.estado == 1 ? 2 : 1
+                estado_cliente_id: this.selectedValue.estado_cliente_id == 1 ? 2 : 1
             }).subscribe(response => {
                 this._get.subscribe((data) => {
                     this.showToast("success", "Exito", "Los datos se guardaron con exito");
-                    this.proveedores = data;
+                    this.platos = data;
                     this.selectedValue = null;
                     this.id = 0;
                     this.index();
@@ -365,17 +303,13 @@ export class ProveedoresComponent implements OnInit {
 
         this.fb = new FormBuilder();
         form = this.fb.group({
-            'razon_social': [this.razon_social, [Validators.required]],
             'nombre': [this.nombre, [Validators.required]],
-            'direccion': [this.direccion, [Validators.required, Validators.minLength(4), Validators.maxLength(24)]],
-            'codigo_postal': this.codigo_postal,
-            'telefono': this.telefono,
-            'contacto': this.contacto,
-            'mail': this.mail,
-            'estado': this.estado,
-            'empresa_id': this.empresa_id,
-            'cuit': this.cuit,
-            'nota': this.nota
+            'guarnicion': [this.guarnicion, [Validators.required, Validators.minLength(4), Validators.maxLength(24)]],
+            'cantidad_personas': this.cantidad_personas,
+            'detalle': this.detalle,
+            'costo_plato': this.costo_plato,
+            'margen_ganancia': this.margen_ganancia,
+            'empresa_id': this.empresa_id
         });
 
         form.valueChanges
@@ -388,22 +322,16 @@ export class ProveedoresComponent implements OnInit {
     }
 
     formErrors = {
-        'apellido': '',
         'nombre': '',
-        'direccion': ''
+        'guarnicion': ''
     };
     validationMessages = {
-        'razon_social': {
-            'required': 'Requerido',
-            'minlength': 'Mínimo 3 letras',
-            'maxlength': 'El apellido no puede tener mas de 150 letras'
-        },
         'nombre': {
             'required': 'Requerido',
             'minlength': 'Mínimo 3 letras',
             'maxlength': 'El nombre no puede tener mas de 150 letras'
         },
-        'direccion': {
+        'guarnicion': {
             'required': 'Requerido',
             'minlength': 'Mínimo 3 letras',
             'maxlength': 'La dirección no puede tener mas de 150 letras'

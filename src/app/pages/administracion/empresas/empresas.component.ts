@@ -201,6 +201,7 @@ export class EmpresasComponent implements OnInit {
         }).subscribe(response => {
             this._get.subscribe((data) => {
                 this.empresas = data;
+                this.formContainer.reset();
                 this.id = 0;
                 this.index();
             }, err => {
@@ -229,6 +230,7 @@ export class EmpresasComponent implements OnInit {
         }).subscribe(response => {
             this._get.subscribe((data) => {
                 this.empresas = data;
+                this.formContainer.reset();
                 this.id = 0;
                 this.index();
             }, err => {

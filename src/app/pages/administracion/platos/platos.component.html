@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header>Administrar Platos</nb-card-header>
+            <nb-card-body>
+                <toaster-container [toasterconfig]="config"></toaster-container>
+
+                <div class="" [ngClass]="{'index': showPanel}">
+                    <div class="col-lg-12" style="margin-bottom: 15px;">
+                        <div class="input-group mail-btn-group">
+                            <input type="text" [(ngModel)]="filtro" class="form-control" placeholder="Buscar...">
+                          <span class="input-group-btn">
+                            <button class="btn btn-primary btn-icon">
+                                <i class="ion-search"></i>
+                            </button>
+                          </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <!--<ng2-smart-table [settings]="settings" [source]="clientes" (rowSelect)="onRowSelect($event)">
+                        </ng2-smart-table>-->
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Plato</th>
+                                <th>Personas</th>
+                                <th>Costo Plato</th>
+                                <th>Estado</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let item of platos" (click)="onRowSelect(item)">
+                                <th scope="row">{{item.id}}</th>
+                                <td>{{item.nombre}}</td>
+                                <td>{{item.cantidad_personas}}</td>
+                                <td>{{item.costo_plato}}</td>
+                                <td>{{item.estado == 1 ? 'Activo' : 'Inactivo'}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-secondary" (click)="crear()">Nuevo</button>
+                        <button type="reset" class="btn btn-danger" (click)="modificar()">Editar</button>
+                        <button type="reset" class="btn btn-danger" (click)="changeStatus()">Activar/Desactivar</button>
+                    </div>
+                </div>
+                <div class="" [ngClass]="{'panel': showIndex}">
+                    <form role="form" [formGroup]="formContainer" novalidate (ngSubmit)="save()" accept-charset="utf-8">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" formControlName="nombre">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Guarnición</label>
+                                    <input type="text" class="form-control" formControlName="guarnicion">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Cant Personas</label>
+                                    <input type="number" class="form-control" formControlName="cantidad_personas">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Costo Plato</label>
+                                    <input type="number" class="form-control" formControlName="costo_plato">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Margen Ganancia</label>
+                                    <input type="number" class="form-control" formControlName="margen_ganancia">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Detalle</label>
+                                    <input class="form-control" formControlName="detalle">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn btn-secondary">Guardar</button>
+                                <button type="reset" class="btn btn-danger" (click)="index()">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

@@ -55,7 +55,7 @@ class Permissions{
             'updateStatus' => PermissionTypes::Allowed
         ),
         'Plato' => array(
-            'getPlatos' => PermissionTypes::Allowed,
+            'get' => PermissionTypes::Allowed,
             'create' => PermissionTypes::Allowed,
             'update' => PermissionTypes::Allowed,
             'updateStatus' => PermissionTypes::Allowed

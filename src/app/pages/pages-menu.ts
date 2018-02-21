@@ -5,6 +5,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Dashboard',
     icon: 'nb-home',
     link: '/pages/dashboard',
+    home: false,
+  },
+  {
+    title: 'Pricipal',
+    icon: 'nb-home',
+    link: '/pages/principal',
     home: true,
   },
   {
@@ -30,6 +36,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Salones',
         link: '/pages/administracion/salones',
+      },
+      {
+        title: 'Platos',
+        link: '/pages/administracion/platos',
       },
     ],
   },
