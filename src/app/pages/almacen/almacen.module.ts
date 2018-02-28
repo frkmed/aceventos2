@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SmartTableService } from '../../@core/data/smart-table.service';
 import { ToasterModule } from 'angular2-toaster';
 
+import { SharedModule } from './../../shared/shared.module';
+
 @NgModule({
     imports: [
         ThemeModule,
@@ -15,6 +17,7 @@ import { ToasterModule } from 'angular2-toaster';
         ReactiveFormsModule,
         Ng2SmartTableModule,
         ToasterModule,
+        SharedModule
     ],
     declarations: [
 ...routedComponents,

@@ -21,6 +21,7 @@ import { CoreService } from "./core/core.service";
 import { AuthenticationService } from "./core/auth/authentication.service";
 import { AuthGuard } from './core/auth/auth-guard.service';
 
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { AuthGuard } from './core/auth/auth-guard.service';
     BrowserAnimationsModule,
     HttpModule,
     AppRoutingModule,
+    SharedModule,
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),

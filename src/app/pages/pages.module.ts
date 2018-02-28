@@ -7,8 +7,10 @@ import { ThemeModule } from '../@theme/theme.module';
 
 import { PrincipalModule } from './principal/principal.module';
 
+
 const PAGES_COMPONENTS = [
   PagesComponent,
+
 ];
 
 @NgModule({
@@ -21,6 +23,9 @@ const PAGES_COMPONENTS = [
   declarations: [
     ...PAGES_COMPONENTS,
   ],
+  exports: [
+
+  ]
 })
 export class PagesModule {
 }

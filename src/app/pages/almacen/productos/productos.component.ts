@@ -11,6 +11,8 @@ import { DbConnectService } from "../../../core/db-connect/db-connect.service";
 
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 
+import { ViewChild } from '@angular/core';
+
 import 'style-loader!angular2-toaster/toaster.css';
 
 @Component({
@@ -61,9 +63,13 @@ export class ProductosComponent implements OnInit {
     public iva: number = 0;
     public tiempo_espera: number = 0;
     public empresa_id: number = 1;
+    public foto: string = '';
 
     formContainer: FormGroup;
     private fb: FormBuilder;
+
+
+    @ViewChild('foto_uploader') foto_uploader;
 
     //METODOS
     private _get;
@@ -179,6 +185,7 @@ export class ProductosComponent implements OnInit {
      */
     onRowSelect(item): void {
         this.id = item.id;
+        this.foto = item.foto;
         this.selectedValue = item;
         this.formContainer.setValue({
             nombre: item.nombre,
@@ -205,64 +212,86 @@ export class ProductosComponent implements OnInit {
     }
 
     create() {
+        this.foto_uploader.onSubmit();
+
         let cn: any;
-        cn = this.dbConnectService.post('producto', 'create', {
-            nombre: this.formContainer.get('nombre').value,
-            descripcion: this.formContainer.get('descripcion').value,
-            pto_repo: this.formContainer.get('pto_repo').value,
-            sku: this.formContainer.get('sku').value,
-            status: this.formContainer.get('status').value,
-            vendidos: this.formContainer.get('vendidos').value,
-            destacado: this.formContainer.get('destacado').value,
-            en_slider: this.formContainer.get('en_slider').value,
-            en_oferta: this.formContainer.get('en_oferta').value,
-            producto_tipo_id: this.formContainer.get('producto_tipo_id').value,
-            iva: this.formContainer.get('iva').value,
-            tiempo_espera: this.formContainer.get('tiempo_espera').value
-        }).subscribe(response => {
-            this._get.subscribe((data) => {
-                this.showToast("success", "Exito", "Los datos se guardaron con exito");
-                this.productos = data;
-                this.selectedValue = null;
-                this.formContainer.reset();
-                this.id = 0;
-                this.index();
-            }, err => {
-                console.log(err);
-                this.showToast("error", "Error", err);
-            });
+        this.foto_uploader.status.subscribe((data) => {
+            console.log(data.status);
+            if (data.status == 200) {
+                this.foto = data.originalName;
+                cn = this.dbConnectService.post('producto', 'create', {
+                    nombre: this.formContainer.get('nombre').value,
+                    descripcion: this.formContainer.get('descripcion').value,
+                    pto_repo: this.formContainer.get('pto_repo').value,
+                    sku: this.formContainer.get('sku').value,
+                    status: this.formContainer.get('status').value,
+                    vendidos: this.formContainer.get('vendidos').value,
+                    destacado: this.formContainer.get('destacado').value,
+                    en_slider: this.formContainer.get('en_slider').value,
+                    en_oferta: this.formContainer.get('en_oferta').value,
+                    producto_tipo_id: this.formContainer.get('producto_tipo_id').value,
+                    iva: this.formContainer.get('iva').value,
+                    tiempo_espera: this.formContainer.get('tiempo_espera').value,
+                    foto: this.foto
+                }).subscribe(response => {
+                    this._get.subscribe((data) => {
+                        this.showToast("success", "Exito", "Los datos se guardaron con exito");
+                        this.productos = data;
+                        this.selectedValue = null;
+                        this.formContainer.reset();
+                        this.id = 0;
+                        this.index();
+                    }, err => {
+                        console.log(err);
+                        this.showToast("error", "Error", err);
+                    });
+                });
+            }
         });
+
     }
 
     update() {
+        this.foto_uploader.onSubmit();
+
         let cn: any;
-        cn = this.dbConnectService.post('producto', 'update', {
-            id: this.id,
-            nombre: this.formContainer.get('nombre').value,
-            descripcion: this.formContainer.get('descripcion').value,
-            pto_repo: this.formContainer.get('pto_repo').value,
-            sku: this.formContainer.get('sku').value,
-            status: this.formContainer.get('status').value,
-            vendidos: this.formContainer.get('vendidos').value,
-            destacado: this.formContainer.get('destacado').value,
-            en_slider: this.formContainer.get('en_slider').value,
-            en_oferta: this.formContainer.get('en_oferta').value,
-            producto_tipo_id: this.formContainer.get('producto_tipo_id').value,
-            iva: this.formContainer.get('iva').value,
-            tiempo_espera: this.formContainer.get('tiempo_espera').value
-        }).subscribe(response => {
-            this._get.subscribe((data) => {
-                this.showToast("success", "Exito", "Los datos se guardaron con exito");
-                this.productos = data;
-                this.selectedValue = null;
-                this.formContainer.reset();
-                this.id = 0;
-                this.index();
-            }, err => {
-                console.log(err);
-                this.showToast("error", "Error", err);
-            });
-        })
+        this.foto_uploader.status.subscribe((data) => {
+
+            if (data.status == 200) {
+                this.foto = data.originalName;
+
+                cn = this.dbConnectService.post('producto', 'update', {
+                    id: this.id,
+                    nombre: this.formContainer.get('nombre').value,
+                    descripcion: this.formContainer.get('descripcion').value,
+                    pto_repo: this.formContainer.get('pto_repo').value,
+                    sku: this.formContainer.get('sku').value,
+                    status: this.formContainer.get('status').value,
+                    vendidos: this.formContainer.get('vendidos').value,
+                    destacado: this.formContainer.get('destacado').value,
+                    en_slider: this.formContainer.get('en_slider').value,
+                    en_oferta: this.formContainer.get('en_oferta').value,
+                    producto_tipo_id: this.formContainer.get('producto_tipo_id').value,
+                    iva: this.formContainer.get('iva').value,
+                    tiempo_espera: this.formContainer.get('tiempo_espera').value,
+                    foto: this.foto
+                }).subscribe(response => {
+                    this._get.subscribe((data) => {
+                        this.showToast("success", "Exito", "Los datos se guardaron con exito");
+                        this.productos = data;
+                        this.selectedValue = null;
+                        this.formContainer.reset();
+                        this.id = 0;
+                        this.index();
+                    }, err => {
+                        console.log(err);
+                        this.showToast("error", "Error", err);
+                    });
+                })
+            }
+
+        });
+
     }
 
     changeStatus() {

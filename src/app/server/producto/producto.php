@@ -44,6 +44,7 @@ class Producto extends Main{
                 'producto_tipo_id' => $decoded->producto_tipo_id,
                 'iva' => $decoded->iva,
                 'tiempo_espera' => $decoded->tiempo_espera,
+                'foto' => $decoded->foto,
                 'empresa_id' => $decoded->empresa_id
             );
             $result = $this->db->insert('productos', $data);
@@ -85,6 +86,7 @@ class Producto extends Main{
                 'producto_tipo_id' => $decoded->producto_tipo_id,
                 'iva' => $decoded->iva,
                 'tiempo_espera' => $decoded->tiempo_espera,
+                'foto' => $decoded->foto,
                 'empresa_id' => $decoded->empresa_id
             );
             $this->db->where('id', $params->id);
@@ -150,6 +152,7 @@ class Producto extends Main{
         $params->producto_tipo_id = (!array_key_exists("producto_tipo_id", $params)) ? 0 : $params->producto_tipo_id;
         $params->iva = (!array_key_exists("iva", $params)) ? 0.00 : $params->iva;
         $params->tiempo_espera = (!array_key_exists("tiempo_espera", $params)) ? 0 : $params->tiempo_espera;
+        $params->foto = (!array_key_exists("foto", $params)) ? '' : $params->foto;
         $params->empresa_id = (!array_key_exists("empresa_id", $params)) ? 0 : $params->empresa_id;
 
         return $params;
