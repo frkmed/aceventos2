@@ -12,6 +12,7 @@ class Pais extends Main{
      */
     function getPaises(){
         try {
+            $this->db->orderBy("nombre","asc");
             $results = $this->db->get('paises');
 
             $this->sendResponse($results);
@@ -28,7 +29,21 @@ class Pais extends Main{
      */
     function getProvincias(){
         try {
-            //$this->db->where('pais_id', $params->pais_id);
+            $this->db->orderBy("nombre","asc");
+            $results = $this->db->get('provincias');
+
+            $this->sendResponse($results);
+        } catch
+        (Exception $e) {
+            $this->db->rollback();
+            $this->sendResponse('Caught exception: ' . $e->getMessage() . "\n");
+        }
+    }
+
+    function getProvinciasByPais($params){
+        try {
+            $this->db->orderBy("nombre","asc");
+            $this->db->where('pais_id', $params->pais_id);
             $results = $this->db->get('provincias');
 
             $this->sendResponse($results);
@@ -45,7 +60,21 @@ class Pais extends Main{
      */
     function getLocalidades(){
         try {
-            //$this->db->where('provincia_id', $params->provincia_id);
+            $this->db->orderBy("nombre","asc");
+            $results = $this->db->get('localidades');
+
+            $this->sendResponse($results);
+        } catch
+        (Exception $e) {
+            $this->db->rollback();
+            $this->sendResponse('Caught exception: ' . $e->getMessage() . "\n");
+        }
+    }
+
+    function getLocalidadesByProvincia($params){
+        try {
+            $this->db->orderBy("nombre","asc");
+            $this->db->where('provincia_id', $params->provincia_id);
             $results = $this->db->get('localidades');
 
             $this->sendResponse($results);

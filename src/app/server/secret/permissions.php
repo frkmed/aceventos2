@@ -46,7 +46,9 @@ class Permissions{
         'Pais' => array(
             'getPaises' => PermissionTypes::Allowed,
             'getProvincias' => PermissionTypes::Allowed,
-            'getLocalidades' => PermissionTypes::Allowed
+            'getProvinciasByPais' => PermissionTypes::Allowed,
+            'getLocalidades' => PermissionTypes::Allowed,
+            'getLocalidadesByProvincia' => PermissionTypes::Allowed
         ),
         'Salon' => array(
             'get' => PermissionTypes::Allowed,

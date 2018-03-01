@@ -239,6 +239,7 @@ export class ProductosComponent implements OnInit {
                         this.productos = data;
                         this.selectedValue = null;
                         this.formContainer.reset();
+                        this.foto = '';
                         this.id = 0;
                         this.index();
                     }, err => {
@@ -281,6 +282,7 @@ export class ProductosComponent implements OnInit {
                         this.productos = data;
                         this.selectedValue = null;
                         this.formContainer.reset();
+                        this.foto = '';
                         this.id = 0;
                         this.index();
                     }, err => {
@@ -309,6 +311,7 @@ export class ProductosComponent implements OnInit {
                     this.showToast("success", "Exito", "Los datos se guardaron con exito");
                     this.productos = data;
                     this.selectedValue = null;
+                    this.foto = '';
                     this.id = 0;
                     this.index();
                 }, err => {
@@ -328,6 +331,9 @@ export class ProductosComponent implements OnInit {
         this.inicializarMensajeria();
         this.showIndex = false;
         this.showPanel = true;
+        this.selectedValue = null;
+        this.formContainer.reset();
+        this.id = 0;
     }
 
     modificar() {

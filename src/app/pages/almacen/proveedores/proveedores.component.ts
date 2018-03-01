@@ -129,8 +129,8 @@ export class ProveedoresComponent implements OnInit {
     ngOnInit() {
         this.loadProveedores();
         this.loadPaises();
-        this.loadProvincias();
-        this.loadLocalidades();
+        //this.loadProvincias();
+        //this.loadLocalidades();
 
         this.formContainer = this.buildForm(this.formContainer);
     }
@@ -171,26 +171,40 @@ export class ProveedoresComponent implements OnInit {
         this._getPa.subscribe((data) => {
             console.log(data);
             this.paises = data;
+            this.loadProvincias(data[0].id);
         });
     }
 
-    loadProvincias():void {
-        this._getPro = this.dbConnectService.get('pais', 'getProvincias', {});
+    loadProvincias(pais_id):void {
+        //this._getPro = this.dbConnectService.get('pais', 'getProvincias', {});
+        this._getPro = this.dbConnectService.get('pais', 'getProvinciasByPais', {pais_id: pais_id});
 
         this._getPro.subscribe((data) => {
             console.log(data);
             this.provincias = data;
+            this.loadLocalidades(data[0].id);
         });
     }
 
-    loadLocalidades():void {
-        this._getLoc = this.dbConnectService.get('pais', 'getLocalidades', {});
+    loadLocalidades(provincia_id):void {
+        this._getLoc = this.dbConnectService.get('pais', 'getLocalidadesByProvincia', {provincia_id: provincia_id});
 
         this._getLoc.subscribe((data) => {
             console.log(data);
             this.localidades = data;
         });
     }
+
+    onChangePais(event):void {
+        console.log(event);
+        this.loadProvincias(event);
+    }
+
+    onChangeProvincia(event): void {
+        console.log(event);
+        this.loadLocalidades(event);
+    }
+
     /*
      onRowSelect(event): void {
      console.log(event.data);
@@ -227,8 +241,6 @@ export class ProveedoresComponent implements OnInit {
             codigo_postal: item.codigo_postal,
             contacto: item.contacto,
             mail: item.mail,
-            estado: item.estado,
-            empresa_id: item.empresa_id,
             cuit: item.cuit,
             nota: item.nota
         });
@@ -255,10 +267,9 @@ export class ProveedoresComponent implements OnInit {
             localidad_id: this.localidad_id,
             contacto: this.formContainer.get('contacto').value,
             mail: this.formContainer.get('mail').value,
-            estado: this.formContainer.get('estado').value,
+            estado: 1,
             cuit: this.formContainer.get('cuit').value,
-            nota: this.formContainer.get('nota').value,
-            empresa_id: this.formContainer.get('empresa_id').value
+            nota: this.formContainer.get('nota').value
         }).subscribe(response => {
             this._get.subscribe((data) => {
                 this.showToast("success", "Exito", "Los datos se guardaron con exito");
@@ -288,10 +299,9 @@ export class ProveedoresComponent implements OnInit {
             localidad_id: this.localidad_id,
             contacto: this.formContainer.get('contacto').value,
             mail: this.formContainer.get('mail').value,
-            estado: this.formContainer.get('estado').value,
+            estado: this.selectedValue.estado,
             cuit: this.formContainer.get('cuit').value,
-            nota: this.formContainer.get('nota').value,
-            empresa_id: this.formContainer.get('empresa_id').value
+            nota: this.formContainer.get('nota').value
         }).subscribe(response => {
             this._get.subscribe((data) => {
                 this.showToast("success", "Exito", "Los datos se guardaron con exito");
@@ -341,6 +351,9 @@ export class ProveedoresComponent implements OnInit {
         this.inicializarMensajeria();
         this.showIndex = false;
         this.showPanel = true;
+        this.selectedValue = null;
+        this.formContainer.reset();
+        this.id = 0;
     }
 
     modificar() {
@@ -372,8 +385,6 @@ export class ProveedoresComponent implements OnInit {
             'telefono': this.telefono,
             'contacto': this.contacto,
             'mail': this.mail,
-            'estado': this.estado,
-            'empresa_id': this.empresa_id,
             'cuit': this.cuit,
             'nota': this.nota
         });
@@ -388,7 +399,7 @@ export class ProveedoresComponent implements OnInit {
     }
 
     formErrors = {
-        'apellido': '',
+        'razon_social': '',
         'nombre': '',
         'direccion': ''
     };
