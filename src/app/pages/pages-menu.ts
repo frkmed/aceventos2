@@ -56,7 +56,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
             link: '/pages/almacen/productos',
         },
     ],
-  },
+  },/*
   {
     title: 'UI Features',
     icon: 'nb-keypad',
@@ -178,7 +178,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/tables/smart-table',
       },
     ],
-  },
+  },*/
   {
     title: 'Auth',
     icon: 'nb-locked',
@@ -203,7 +203,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Login',
-    icon: 'nb-gear',
+    icon: 'nb-power',
     link: '/pages/login'
   }
 ];

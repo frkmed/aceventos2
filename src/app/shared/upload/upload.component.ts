@@ -13,7 +13,7 @@ export class UploadComponent implements OnInit, OnChanges {
     form: FormGroup;
     loading: boolean = false;
     method = 'POST';
-    url = './server/upload.php';
+    url = './server/upload/upload.php';
     images_url = 'http://localhost/aceventos2/src/app/images/';
     // @Output NgModuleCompileResult
 
