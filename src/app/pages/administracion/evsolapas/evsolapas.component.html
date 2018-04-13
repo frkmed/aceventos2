@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Buscar Cliente...">
+        </div>
+    </div>
+    <div class="col-md-2">
+        <button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <button type="submit" class="btn btn-primary" (click)="solapaCliente()">Cliente</button>
+        <button type="submit" class="btn btn-primary" (click)="solapaEvento()">Evento</button>
+        <button type="submit" class="btn btn-primary" (click)="solapaPresupuesto()">Presupuesto</button>
+        <button type="submit" class="btn btn-primary" (click)="solapaContrato()">Contrato</button>
+        <button type="submit" class="btn btn-primary" (click)="solapaFacturacion()">Facturación</button>
+        <button type="submit" class="btn btn-primary" (click)="solapaInvitados()">Invitados</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" [ngClass]="{'cliente': !cliente}">
+        <nb-card>
+            <nb-card-header>Datos del Cliente</nb-card-header>
+            <nb-card-body>
+                <admin-cliente [cliente]=""></admin-cliente>
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+    <div class="col-md-12" [ngClass]="{'evento': !evento}">
+        <nb-card>
+            <nb-card-header>Datos del Evento</nb-card-header>
+            <nb-card-body>
+                <admin-eventos [cliente]="" [evento]=""></admin-eventos>
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+    <div class="col-md-12" [ngClass]="{'presupuesto': !presupuesto}">
+        <nb-card>
+            <nb-card-header>Presupuesto</nb-card-header>
+            <nb-card-body>
+                Datos del cliente
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+    <div class="col-md-12" [ngClass]="{'contrato': !contrato}">
+        <nb-card>
+            <nb-card-header>Contrato</nb-card-header>
+            <nb-card-body>
+                Datos del cliente
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+    <div class="col-md-12" [ngClass]="{'facturacion': !facturacion}">
+        <nb-card>
+            <nb-card-header>Facturación</nb-card-header>
+            <nb-card-body>
+                Datos del cliente
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+    <div class="col-md-12" [ngClass]="{'invitados': !invitados}">
+        <nb-card>
+            <nb-card-header>Invitados</nb-card-header>
+            <nb-card-body>
+                Datos del cliente
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+</div>

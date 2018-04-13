@@ -22,6 +22,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-gear',
     children: [
       {
+        title: 'Gestionar Eventos',
+        link: '/pages/administracion/evsolapas',
+      },
+      {
         title: 'Eventos',
         link: '/pages/administracion/eventos',
       },

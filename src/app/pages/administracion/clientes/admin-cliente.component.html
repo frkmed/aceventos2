@@ -1,0 +1,97 @@
+<form role="form" [formGroup]="formContainer" novalidate (ngSubmit)="save()" accept-charset="utf-8">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Apellido</label>
+                <input class="form-control" formControlName="apellido" [(ngModel)]="apellido">
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input class="form-control" formControlName="nombre" [(ngModel)]="nombre">
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>Cuil</label>
+                <input type="number" class="form-control" formControlName="cuil" [(ngModel)]="cuil">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label>Dirección</label>
+                <input class="form-control" formControlName="direccion" [(ngModel)]="direccion">
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="form-group">
+                <label>Cod. Postal</label>
+                <input type="number" class="form-control" formControlName="codigo_postal" [(ngModel)]="codigo_postal">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Teléfono</label>
+                <input type="number" class="form-control" formControlName="telefono" [(ngModel)]="telefono">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Pais</label>
+                <select [(ngModel)]="pais_id" [ngModelOptions]="{standalone: true}"
+                        class="form-control" >
+                    <option *ngFor="let pais of paises" [ngValue]="pais.id">{{pais.nombre}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Provincia</label>
+                <select [(ngModel)]="provincia_id" [ngModelOptions]="{standalone: true}"
+                        class="form-control" >
+                    <option *ngFor="let provincia of provincias" [ngValue]="provincia.id">{{provincia.nombre}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Localidad</label>
+                <select [(ngModel)]="localidad_id" [ngModelOptions]="{standalone: true}"
+                        class="form-control">
+                    <option *ngFor="let localidad of localidades" [ngValue]="localidad.id">{{localidad.nombre}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Mail</label>
+                <input class="form-control" formControlName="mail" [(ngModel)]="mail">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Estado</label>
+                <select class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="reset" class="btn btn-danger" (click)="onCancel($event)">Cancelar</button>
+        </div>
+    </div>
+</form>

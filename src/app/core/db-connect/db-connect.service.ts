@@ -31,7 +31,7 @@ export class DbConnectService implements OnInit {
             {provide: XSRFStrategy, useFactory: () => new CookieXSRFStrategy()}
         ]);
         this._http = injector.get(Http);
-        console.log(this._http);
+        //console.log(this._http);
 
     }
 
@@ -145,7 +145,7 @@ export class DbConnectService implements OnInit {
     }
 
     public extractData(obj: string, fnc: string, data: Response, coreService) {
-        console.log(data);
+        //console.log(data);
 
         if (data['_body'] != '') {
 

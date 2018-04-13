@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdministracionComponent } from './administracion.component';
+import { EvsolapasComponent } from './evsolapas/evsolapas.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { EmpresasComponent } from './empresas/empresas.component';
@@ -13,6 +14,9 @@ const routes: Routes = [{
     path: '',
     component: AdministracionComponent,
     children: [{
+        path: 'evsolapas',
+        component: EvsolapasComponent,
+    },  {
         path: 'eventos',
         component: EventosComponent,
     },  {
@@ -44,6 +48,7 @@ export class AdministracionRoutingModule {
 
 export const routedComponents = [
     AdministracionComponent,
+    EvsolapasComponent,
     EventosComponent,
     ClientesComponent,
     EmpresasComponent,
